@@ -20,7 +20,9 @@ class VideoDurationProcess:
         durtime = ""
         duration = 0
         # 进程
-        parameter = "ffmpeg.exe -i " + sys.path[0] + "/" + vfilename + " -report"
+        # parameter = "ffmpeg.exe -i " + sys.path[0] + "/" + vfilename + " -report test.mp4"
+        parameter = "ffmpeg.exe -i " + sys.path[0] + "/" + vfilename + " -report test.mp4"
+        # parameter = "ffmpeg.exe -i " + "\"" + sys.path[-1] + "\\input\\" + vfilename + "\"" + " -report"
         run(parameter, shell=True)
         logexists = False
         logdir = os.listdir()
@@ -39,6 +41,7 @@ class VideoDurationProcess:
                     print(readdur)
                     reg = 'Duration\:\s(\d+)\:(\d+)\:([\d\.]+)'
                     durtime = re.compile(reg).findall(readdur)
+                    print(durtime)
                     duration = int(durtime[0][0]) * 3600 + int(durtime[0][1]) * 60 + float(durtime[0][2])
                     print("总时长：" + str(duration) + "秒")
                     logexists = True
